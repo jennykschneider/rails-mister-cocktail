@@ -1,0 +1,15 @@
+<div class=container>
+
+<h1>All Cocktails</h1>
+
+<% @cocktails.each do |cocktail| %>
+  <% link_to cocktail_path(cocktail) do %>
+    <div class="card-category" style="background-image: linear-gradient" >
+      <%= cocktail.name %>
+    </div>
+  <% end %>
+<% end %>
+</div>
+
+
+
