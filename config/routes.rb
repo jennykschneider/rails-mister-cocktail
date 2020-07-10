@@ -1,7 +1,28 @@
 Rails.application.routes.draw do
-  root to: 'cocktails#index'
-  resources :ingredients, only: [:destroy]
-    resources :cocktails do
-      resources :ingredients, only: [:new, :create, :index]
-    end
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "cocktails#index"
+  resources :cocktails, only: [:index, :show, :new, :create] do
+    resources :doses, only: [:create]
+    resources :reviews, only: [:create]
+  end
+  resources :doses, only: [:destroy]
 end
+
+# GET "cocktails"
+# A user can see the details of a given cocktail,
+# with the dose needed for each ingredient
+# GET "cocktails/42"
+# A user can create a new cocktail
+# GET "cocktails/new"
+# POST "cocktails"
+
+# A user can add a new dose (ingredient/description pair)
+# to an existing cocktail
+# Checkout simple_form docs about f.association
+# to easily create a select dropdown for our list of ingredients.
+# GET "cocktails/42/doses/new"
+# POST "cocktails/42/doses"
+# A user can delete a dose that belongs to an existing cocktail
+# How can we make a delete link again?
+# DELETE "doses/25"
+# Do we need an IngredientsController?
